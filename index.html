@@ -1,0 +1,132 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <meta name="theme-color" content="#f6f6f0"/>
+  <title>Perlin Atelier — Generative art for pen plotters</title>
+  <meta name="description" content="Explore seeded Perlin-noise artwork. Export plotter-friendly SVG designs in millimetres."/>
+  <link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">
+      <span class="brand-mark" aria-hidden="true"><svg viewBox="0 0 32 32" fill="none"><path d="M3 24C9 24 9 8 16 8S23 24 29 24M3 18C9 18 9 13 16 13S23 18 29 18" stroke="#28604D" stroke-width="2.1" stroke-linecap="round"/></svg></span>
+      <div><h1>Perlin Atelier</h1><p>Generative studies in line &amp; lettering · v1.1.1</p></div>
+    </div>
+    <div class="top-actions">
+      <button id="about-button" class="button subtle" type="button" aria-label="About Perlin Atelier">About</button>
+      <button id="reset" class="button" type="button">Reset</button>
+    </div>
+  </header>
+  <main class="layout">
+    <aside class="sidebar" aria-label="Artwork controls">
+      <section class="group">
+        <div class="small-label">01 · Explore</div>
+        <h2>Starting points</h2>
+        <div class="preset-grid">
+          <button type="button" data-preset="Letter garden">Aa &nbsp;Letter garden</button>
+          <button type="button" data-preset="Soft currents">〰 &nbsp;Soft currents</button>
+          <button type="button" data-preset="River delta">↝ &nbsp;River delta</button>
+          <button type="button" data-preset="Highlands">◉ &nbsp;Highlands</button>
+          <button type="button" data-preset="Quiet orbit">◎ &nbsp;Quiet orbit</button>
+          <button type="button" data-preset="Ink study">≋ &nbsp;Ink study</button>
+        </div>
+      </section>
+      <hr class="group-divider"/>
+      <section class="group">
+        <div class="small-label">02 · Composition</div>
+        <h2>Make it yours</h2>
+        <label class="field"><span class="field-title">Drawing style</span><select id="style" aria-label="Drawing style"></select></label>
+        <div class="two-col">
+          <label class="field"><span class="field-title">Paper</span><select id="paper" aria-label="Paper size"></select></label>
+          <label class="field"><span class="field-title">Orientation</span><select id="orientation" aria-label="Orientation"><option value="portrait">Portrait</option><option value="landscape">Landscape</option></select></label>
+        </div>
+        <label class="field"><span class="field-title">Pen palette</span><select id="palette" aria-label="Pen palette"></select></label>
+        <label class="field"><span class="field-title">Random seed</span><span class="seed-row"><input id="seed" type="text" maxlength="60" value="271828" aria-label="Random seed"/><button class="button" id="surprise" type="button" title="New random seed">Surprise ↗</button></span></label>
+      </section>
+      <hr class="group-divider"/>
+      <section class="group" id="lettering-controls">
+        <div class="small-label">03 · Letter garden</div>
+        <h2>Give your lines a voice</h2>
+        <label class="field"><span class="field-title">Letter source</span><select id="textMode" aria-label="Letter source">
+          <option value="repeat">Repeat my text</option><option value="random">Shuffle my characters</option>
+          <option value="mixed">Random mixed-case letters</option><option value="numbers">Random numbers</option><option value="symbols">Random symbols</option>
+        </select></label>
+        <label class="field"><span class="field-title">Your text <span class="optional">up to 240 characters</span></span>
+          <textarea id="text" rows="2" maxlength="240" aria-label="Your text" spellcheck="false"></textarea></label>
+        <p class="field-help">English upper- and lower-case letters, numbers and common punctuation. Accents become plain letters; unsupported symbols become ?.</p>
+        <label class="field"><span class="field-title">Letter style</span><select id="font" aria-label="Letter style"><option>Monoline</option><option>Slanted</option></select></label>
+        <div class="two-col">
+          <label class="field"><span class="field-title">Rows <output id="rows-value"></output></span><input id="rows" type="range" min="3" max="24" step="1" title="Number of horizontal foundation bands"/></label>
+          <label class="field"><span class="field-title">Growth rounds <output id="rounds-value"></output></span><input id="rounds" type="range" min="1" max="6" step="1" title="Each round sprouts branches from the preceding round"/></label>
+        </div>
+        <div class="two-col">
+          <label class="field"><span class="field-title">Breaks <output id="breaks-value"></output></span><input id="breaks" type="range" min="0" max="10" step="1" title="Number of distorted shapes cut out of the skeleton"/></label>
+          <label class="field"><span class="field-title">Break size <output id="breakSize-value"></output></span><input id="breakSize" type="range" min="4" max="32" step="1" title="Approximate size of the areas removed"/></label>
+        </div>
+        <div class="two-col">
+          <label class="field"><span class="field-title">Letter height <output id="letterSize-value"></output></span><input id="letterSize" type="range" min="1.5" max="8" step="0.25" title="Capital letter height in millimetres; descenders extend below the baseline"/></label>
+          <label class="field"><span class="field-title">Spacing <output id="letterSpacing-value"></output></span><input id="letterSpacing" type="range" min="1" max="1.8" step="0.05" title="Distance between letters as a multiplier"/></label>
+        </div>
+        <label class="field"><span class="field-title">Connecting cables <output id="cables-value"></output></span><input id="cables" type="range" min="0" max="40" step="1" title="Maximum number of curved connections between letters; use zero for lettering alone"/></label>
+        <hr class="group-divider"/>
+      </section>
+      <section class="group">
+        <div class="small-label">04 · Fine tuning</div>
+        <h2>Noise &amp; ink</h2>
+        <label class="field"><span class="field-title">Distortion <output id="amplitude-value" for="amplitude"></output></span><input type="range" id="amplitude" min="0" max="30" step="0.5"/></label>
+        <label class="field"><span class="field-title">Noise scale <output id="scale-value" for="scale"></output></span><input type="range" id="scale" min="5" max="150" step="1"/></label>
+        <label class="field"><span class="field-title">Density <output id="density-value" for="density"></output></span><input type="range" id="density" min="5" max="180" step="1"/></label>
+        <label class="field"><span class="field-title">Noise octaves <output id="octaves-value" for="octaves"></output></span><input type="range" id="octaves" min="1" max="7" step="1"/></label>
+        <label class="field"><span class="field-title">Line detail <output id="detail-value" for="detail"></output></span><input type="range" id="detail" min="1" max="10" step="1"/></label>
+        <div class="two-col">
+          <label class="field"><span class="field-title">Pen width <output id="stroke-value" for="stroke"></output></span><input type="range" id="stroke" min="0.1" max="0.8" step="0.05"/></label>
+          <label class="field"><span class="field-title">Margin <output id="margin-value" for="margin"></output></span><input type="range" id="margin" min="3" max="20" step="1"/></label>
+        </div>
+      </section>
+    </aside>
+    <section class="preview-area" aria-label="Artwork preview">
+      <div class="preview-header"><div><h2>Let your letters wander.</h2><p id="preview-subtitle">Build a composition, one stage at a time.</p></div>
+        <div class="action-bar"><button id="download-png" class="button" type="button">Export PNG</button><button id="download-svg" class="button primary" type="button">↓&nbsp; Download SVG</button></div>
+      </div>
+      <section id="stage-panel" class="stage-panel" aria-label="Five-stage process">
+        <div class="stage-steps" role="group" aria-label="Choose a stage to preview and export">
+          <button type="button" data-stage="0"><small>01</small> Foundation</button>
+          <button type="button" data-stage="1"><small>02</small> Grow</button>
+          <button type="button" data-stage="2"><small>03</small> Break</button>
+          <button type="button" data-stage="3"><small>04</small> Write</button>
+          <button type="button" data-stage="4"><small>05</small> Decorate</button>
+        </div>
+        <input id="stage-index" type="hidden" value="4"/>
+        <p id="stage-description" class="stage-description"></p>
+        <div class="stage-bottom"><span id="stage-summary"></span><label><input id="show-guides" type="checkbox"/> Show construction guides <span class="optional">(preview only)</span></label></div>
+      </section>
+      <div class="stage" id="stage"><div id="artwork" class="paper" role="img" aria-label="Generated Perlin-noise artwork"></div></div>
+      <div class="stat-bar">
+        <div class="stats">
+          <div class="stat"><small>Page</small><strong id="paper-size">—</strong></div>
+          <div class="stat"><small>Plotter paths</small><strong id="path-count">—</strong></div>
+          <div class="stat"><small>Sampled vertices</small><strong id="point-count">—</strong></div>
+        </div><div class="legend" id="palette-legend" aria-label="Pen colour groups"></div>
+      </div>
+      <p class="notice"><strong id="status" class="status" role="status" aria-live="polite">Preparing artwork…</strong><br/><span id="export-note">Export the selected stage; construction guides stay out of your files.</span> SVG uses real millimetre dimensions and separate pen-colour layers. For your Writing Robot T-A4, import at <strong>actual size</strong> and change pens between colour groups.</p>
+    </section>
+  </main>
+  <dialog class="dialog" id="about-dialog" aria-label="About the application">
+    <h2>About Perlin Atelier</h2>
+    <p>A standalone, offline generative-art sketchbook inspired by experiments in mathematical pen plotting. It uses a seeded 2D gradient Perlin-noise function and fractal Brownian motion to produce repeatable drawings.</p>
+    <p><strong>Letter garden:</strong> Foundation → Grow → Break → Write → Decorate. Inspired by <a href="https://newsletter.revdancatt.com/p/099-sweary-plots-doom-maps-postcards" target="_blank" rel="noopener noreferrer">Dan Catt’s newsletter #099, 29 October 2026</a>. This is an original interpretation of his description, with our own geometry and stroke alphabet; it does not reproduce his code or captured handwriting.</p>
+    <p><strong>Other styles:</strong> drifting lines, flow-field streamlines, connected topographic contours and organic orbits. Exported SVGs use physical millimetre dimensions and one named layer per pen colour. Letters are pen strokes, ready to plot without installed fonts.</p>
+    <p><strong>Plotter note:</strong> select a single-pen palette for uncomplicated plotting, or use separate colour passes. Preview colours are suggestions, not calibrated ink measurements. This app does not simulate contact bounce, motor movement, or real ink laydown.</p>
+    <p><strong>Privacy:</strong> all generation happens in this browser. No account, network connection or uploads are required.</p>
+    <button id="about-close" class="button primary" type="button">Close</button>
+  </dialog>
+  <script src="noise.js"></script>
+  <script src="font.js"></script>
+  <script src="lettering.js"></script>
+  <script src="art.js"></script>
+  <script src="downloads.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

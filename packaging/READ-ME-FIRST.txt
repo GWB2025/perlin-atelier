@@ -1,0 +1,32 @@
+PERLIN ATELIER 1.1.1 — MAC INSTALLER
+
+1. Quit any older copy of Perlin Atelier.
+2. Double-click Perlin-Atelier-1.1.1-macOS-Universal-Installer.pkg.
+3. Choose Continue, then Install. Enter your Mac administrator password if asked.
+4. Open Finder > Applications > Perlin Atelier.
+
+The installer places the app at /Applications/Perlin Atelier.app.
+It works on Apple silicon and Intel Macs with macOS 12 or later.
+No Python, Node.js, browser, internet connection or other downloads are needed.
+The app runs in its own window. SVG and PNG export use the Mac Save dialogue.
+
+Choose Letter garden, enter your text and explore the five stages. Select
+Decorate for the finished composition. Import SVGs into your plotter software
+at actual size. The app generates artwork and does not control your plotter.
+
+The app is ad-hoc signed. The installer is unsigned and is not notarised by
+Apple. macOS may block the initial opening. If you trust this specific download,
+follow Apple's per-app approval instructions:
+https://support.apple.com/en-gb/102445
+Do not disable Gatekeeper or other system-wide protections.
+
+The installer contains only the app and has no installation scripts. Your
+exported drawings are not changed. No restart is needed. Uninstall by moving
+Perlin Atelier from Applications to the Bin.
+
+Source and build instructions: https://github.com/GWB2025/perlin-atelier
+The repository is initially private and requires access to Gordon's account.
+Inspired by Dan Catt's newsletter #099; independently implemented.
+
+See VALIDATION.json for checks performed. The installer has been expanded and
+verified without actually installing into Applications.
