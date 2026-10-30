@@ -62,6 +62,13 @@ The same seed and settings produce the same artwork. Use Surprise for another se
 
 The five-stage idea follows Dan Catt's [newsletter #099, 29 October 2026](https://newsletter.revdancatt.com/p/099-sweary-plots-doom-maps-postcards). This is an original interpretation of the published description, not his source code, exact algorithm or captured handwriting. The lettering alphabet was drawn specifically for this app. Perlin noise and fractal Brownian motion also drive the four earlier abstract styles.
 
+## AI assistance
+
+This project includes contributions developed by Gordon Brindle with assistance
+from OpenAI's ChatGPT, particularly with software implementation and
+documentation. Gordon directs the project and makes the final design and
+development decisions.
+
 ## Source and checks
 
 No runtime dependencies. JavaScript modules work in the browser and can be required by Node for tests.
