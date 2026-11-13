@@ -1,5 +1,4 @@
-/* Five-stage composition inspired by Dan Catt's newsletter #099 (29 October 2026).
- * Original algorithms and stroke alphabet; not Dan's source code or handwriting.
+/* Five-stage composition with original algorithms and a purpose-drawn stroke alphabet.
  */
 (function (root, factory) {
   const common = typeof module === 'object' && module.exports;

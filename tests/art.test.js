@@ -27,7 +27,7 @@ test('all original styles retain working, repeatable SVG export', () => {
 });
 
 test('stage and custom text are recorded safely in SVG metadata', () => {
-  const a=Art.makeArtwork({style:'Letter garden',text:'<HELLO> & "Dan"',stage:3});
+  const a=Art.makeArtwork({style:'Letter garden',text:'<HELLO> & "Sam"',stage:3});
   assert.match(a.svg,/&lt;HELLO&gt; &amp;/);
   assert.doesNotMatch(a.svg,/<HELLO>/);
   assert.match(a.svg,/Write/);

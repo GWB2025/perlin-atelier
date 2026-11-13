@@ -36,7 +36,7 @@ test('stroke alphabet supports mixed case, numbers and the advertised symbols', 
 
 const options = { width: 148, height: 105, margin: 7, seed: 'garden', rows: 8,
   rounds: 3, breaks: 4, breakSize: 14, letterSize: 3, letterSpacing: 1.25,
-  cables: 12, text: 'HELLO DAN', textMode: 'repeat', font: 'Monoline',
+  cables: 12, text: 'HELLO SAM', textMode: 'repeat', font: 'Monoline',
   amplitude: 8, scale: 46, density: 56, octaves: 4, detail: 6 };
 
 test('a seed reproduces every stage of the same composition', () => {

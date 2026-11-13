@@ -60,7 +60,7 @@ The same seed and settings produce the same artwork. Use Surprise for another se
 
 ## Inspiration and attribution
 
-The five-stage idea follows Dan Catt's [newsletter #099, 29 October 2026](https://newsletter.revdancatt.com/p/099-sweary-plots-doom-maps-postcards). This is an original interpretation of the published description, not his source code, exact algorithm or captured handwriting. The lettering alphabet was drawn specifically for this app. Perlin noise and fractal Brownian motion also drive the four earlier abstract styles.
+The lettering alphabet was drawn specifically for this app. Perlin noise and fractal Brownian motion also drive the four earlier abstract styles.
 
 ## AI assistance
 

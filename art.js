@@ -341,7 +341,7 @@
         paths.map(d => `    <path d="${d}"/>`).join('\n') + '\n  </g>';
     }).filter(Boolean).join('\n');
     const settings = JSON.stringify({ ...spec, generatedBy: 'Perlin Atelier 1.1.1',
-      ...(model ? { stageName, inspiration: 'Dan Catt newsletter #099; original implementation' } : {}) });
+      ...(model ? { stageName } : {}) });
     const svg = [
       '<?xml version="1.0" encoding="UTF-8"?>',
       `<svg xmlns="http://www.w3.org/2000/svg" xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape" width="${fmt(spec.width)}mm" height="${fmt(spec.height)}mm" viewBox="0 0 ${fmt(spec.width)} ${fmt(spec.height)}">`,

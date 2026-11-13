@@ -17,7 +17,7 @@ for(let stage=0;stage<5;stage++) {
   const art=Art.makeArtwork({style:'Letter garden',stage});
   fs.writeFileSync(path.join(samples,`${stage+1}-${art.stageName.toLowerCase()}.svg`),art.svg);
 }
-const mixed=Art.makeArtwork({style:'Letter garden',text:'Hello Dan! xoxo',font:'Slanted',seed:'postcard-26'});
+const mixed=Art.makeArtwork({style:'Letter garden',text:'Hello Sam! xoxo',font:'Slanted',seed:'postcard-26'});
 fs.writeFileSync(path.join(samples,'mixed-case-postcard.svg'),mixed.svg);
 for(const style of ['Drifting lines','Flow field','Contour map','Organic orbits']) {
   const art=Art.makeArtwork({style});

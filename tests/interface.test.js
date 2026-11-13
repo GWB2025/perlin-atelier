@@ -81,11 +81,11 @@ test('guides are preview-only and an edited text is used in exported SVG', async
   const ui=boot(),n=ui.nodes;
   n.get('show-guides').checked=true;n.get('show-guides').fire('change');
   assert.ok(n.get('artwork').innerHTML.includes('construction-guides'));
-  n.get('text').value='Hello Dan & friends';n.get('text').fire('input');
+  n.get('text').value='Hello Sam & friends';n.get('text').fire('input');
   assert.equal(n.get('download-svg').disabled,true);
   ui.flush();n.get('download-svg').fire('click');
   const download=ui.downloads.at(-1),svg=await download.blob.text();
-  assert.ok(svg.includes('Hello Dan &amp; friends'));
+  assert.ok(svg.includes('Hello Sam &amp; friends'));
   assert.ok(!svg.includes('construction-guides'));
   assert.ok(download.filename.includes('-decorate-'));
 });

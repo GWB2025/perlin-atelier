@@ -26,7 +26,6 @@ Perlin Atelier from Applications to the Bin.
 
 Source and build instructions: https://github.com/GWB2025/perlin-atelier
 The repository is initially private and requires access to Gordon's account.
-Inspired by Dan Catt's newsletter #099; independently implemented.
 
 See VALIDATION.json for checks performed. The installer has been expanded and
 verified without actually installing into Applications.
